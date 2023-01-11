@@ -140,12 +140,12 @@ int main()
 {
 	string str;
 
-	cout << "ÊäÈë£º" << endl;
+	cout << "ÃŠÃ¤ÃˆÃ«Â£Âº" << endl;
 	cin >> str;
 
 	getLong(str);
 
-	cout << "½«ÔÚ5Ãëºó´òÓ¡£¡" << endl;
+	cout << "Â½Â«Ã”Ãš5ÃƒÃ«ÂºÃ³Â´Ã²Ã“Â¡Â£Â¡" << endl;
 	Sleep(5000);
 	keyChoose(str);
 
