@@ -14,32 +14,40 @@ void print()
 {
 	if (bigLitter == true)
 	{
-		keybd_event(20, 0, 0, 0);
-		keybd_event(printNum, 0, 0, 0);
-		keybd_event(printNum, 0, KEYEVENTF_KEYUP, 0);
-		keybd_event(20, 0, KEYEVENTF_KEYUP, 0);
-		Sleep(100);
+		if (GetKeyState(VK_CAPITAL) == true)
+		{
+			keybd_event(printNum, 0, 0, 0);
+			keybd_event(printNum, 0, KEYEVENTF_KEYUP, 0);
+			bigLitter = false;
+		}
+		else
+		{
+			keybd_event(20, 0, 0, 0);
+			keybd_event(printNum, 0, 0, 0);
+			keybd_event(printNum, 0, KEYEVENTF_KEYUP, 0);
+			keybd_event(20, 0, KEYEVENTF_KEYUP, 0);
+			bigLitter = false;
+		}
 	}
 	else
 	{
-		keybd_event(printNum, 0, 0, 0);
-		keybd_event(printNum, 0, KEYEVENTF_KEYUP, 0);
-		Sleep(100);
+		if (GetKeyState(VK_CAPITAL) == true)
+		{
+			keybd_event(20, 0, 0, 0);
+			keybd_event(20, 0, KEYEVENTF_KEYUP, 0);
+			keybd_event(printNum, 0, 0, 0);
+			keybd_event(printNum, 0, KEYEVENTF_KEYUP, 0);
+		}
+		else
+		{
+			keybd_event(printNum, 0, 0, 0);
+			keybd_event(printNum, 0, KEYEVENTF_KEYUP, 0);
+		}
 	}
 }
 
-void litter()
+void litter(char keyL)
 {
-	char keyL = key;
-	if (islower(keyL) != 0)
-	{
-		bigLitter = true;
-		keyL = tolower(keyL);
-	}
-	else
-	{
-		bigLitter = false;
-	}
 	if (keyL == 'a') printNum = 65;
 	else if (keyL == 'b') printNum = 66;
 	else if (keyL == 'c') printNum = 67;
@@ -86,25 +94,35 @@ void number()
 	print();
 }
 
-void stringChoose()
-{
-	if (isalpha(key) != 0) litter();
-	else if (isdigit(key) != 0) number();
-	else
-	{
-		keybd_event(106, 0, 0, 0);
-		keybd_event(106, 0, KEYEVENTF_KEYUP, 0);
-	}	
-}
-
 void keyChoose(string str)
 {
-	int cs = -1;
+	int cs = 0;
 	for (int i = 0; i < longer; i++)
 	{
-		cs++;
 		key = str.at(cs);
-		stringChoose();
+		cs++;
+		Sleep(20);
+
+		if (isalpha(key) == true)
+		{
+			if (islower(key) == false)
+			{
+				key = tolower(key);
+				bigLitter = true;
+			}
+			else
+			{
+				bigLitter = false;
+			}
+			litter(key);
+			Sleep(20);
+		}
+		else if (isdigit(key) == true) number();
+		else
+		{
+			keybd_event(106, 0, 0, 0);
+			keybd_event(106, 0, KEYEVENTF_KEYUP, 0);
+		}
 		Sleep(100);
 	}
 }
@@ -127,10 +145,10 @@ int main()
 
 	getLong(str);
 
-	cout << "将在5秒后打印！";
+	cout << "将在5秒后打印！" << endl;
 	Sleep(5000);
 	keyChoose(str);
 
-	cin.get();
+	system("pause");
 	return 0;
 }
