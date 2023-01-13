@@ -71,8 +71,8 @@ void strCho(char chS)
 
 void sle(unsigned int time)
 {
-	cout << "½«ÔÚ5Ãëºó×Ô¶¯¹Ø±Õ£¡" << endl;
-	cout << "ÈçÐèÔÙ´ÎÆô¶¯Çë°´ÈÎÒâ¼ü£¡" << endl;
+	cout << "å°†åœ¨5ç§’åŽè‡ªåŠ¨å…³é—­ï¼" << endl;
+	cout << "å¦‚éœ€å†æ¬¡å¯åŠ¨è¯·æŒ‰ä»»æ„é”®ï¼" << endl;
 	Sleep(time);
 	if (slep == true)
 	{
@@ -84,7 +84,7 @@ void sle(unsigned int time)
 int main()
 {
 start:
-	cout << "ÊäÈë£º" << endl;
+	cout << "è¾“å…¥ï¼š" << endl;
 	cin >> str;
 
 	for (int i = 0; str[i]; i++)
@@ -93,7 +93,7 @@ start:
 		longer++;
 	}
 
-	cout << "½«ÔÚ5ÃëºóÔËÐÐ£¡" << endl;
+	cout << "å°†åœ¨5ç§’åŽè¿è¡Œï¼" << endl;
 	Sleep(5000);
 
 	int strAt = 0;
@@ -109,6 +109,7 @@ start:
 
 	thread slp(sle, 5000);
 	slp.detach();
+        slep = true;
 
 	system("pause");
 	slep = false;
