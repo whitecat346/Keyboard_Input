@@ -107,9 +107,9 @@ start:
 		Sleep(50);
 	}
 
+        slep = true
 	thread slp(sle, 5000);
 	slp.detach();
-        slep = true;
 
 	system("pause");
 	slep = false;
